@@ -4,32 +4,21 @@
 <%= link_to t('.new', :default => t("helpers.links.new")), new_post_path, :class => 'btn btn-danger' %>
 </h2>
 
-
+<%= form_for Post.new do |f| %>
+ <%= f.text_field :name %>
+ <%= f.text_field :title %>
+ <%= f.text_area :content, :size => "60x1" %>
+ <%= f.submit "New Post" %>
+<% end %>
 
 </div>
 
    
   <div class="row">
-   <% @posts.each do |post| %>
-   <div class="span6">
-  	<h6><%= post.name %></h6>
-        <%= post.content %>
-	<% post.comments.each do |comment| %>
-		<a class="label label-warning" href="#" rel="tooltip" title="<%= comment.commenter %>:<%= comment.body%>">#</a>
-	<% end %>
-	<br/>
-         
-          <div align=right><%= link_to 'Show', post, :class => 'btn btn-info' %></div> 
-	  <!--<%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_post_path(post), :class => 'btn' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      post_path(post),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-inverse' %>-->
-      </div>
-    <% end %>
-    </div>                
+    
+    <%= render :partial => @posts %>
+
+  </div>                
 </div>
 <script>
 $ (function (){ $("#example").popover();  })
